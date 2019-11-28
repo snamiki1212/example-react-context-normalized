@@ -8,3 +8,9 @@ export const todos =
   {id: 6, checked: false, title: 'buy water'},
   {id: 7, checked: false, title: 'buy peper'},
 ]
+
+export const fetchFromResource = (page: number, per:number) => {
+  const from = page * per;
+  const to = from + per;
+  return todos.slice(from, to);
+};

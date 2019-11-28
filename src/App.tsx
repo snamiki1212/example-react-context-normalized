@@ -1,19 +1,27 @@
 import React from "react";
-import { useTodoList } from "./contexts/domain/todoDomain";
-import {TodoView} from './components/TodoView'
+import {TodoViewContainer as TodoViewContextContainer} from './contexts/TodoViewContainer'
+import {TodoViewContainer as TodoViewReducContainer} from './redux/TodoViewContainer'
+
+// 
+import { useSelector, useStore} from 'react-redux'
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <TodoViewContainer />
+      <Test />
+      {/* <TodoViewContextContainer /> */}
+      {/* <TodoViewReducContainer /> */}
     </div>
   );
 };
 
-const TodoViewContainer:React.FC = () => {
-  const { list, fetch, isFinished, check} = useTodoList();
-  return(<TodoView list={list} fetch={fetch} isFinished={isFinished} check={check} />)
-}
 
+const Test = () => {
+  const store = useStore()
+  console.log('store', store.getState())
+  // const test =''
+  const test = useSelector((state:any) => state.TodoDomain.pagination)
+  return(<div>{test}</div>)
+}
 
 export default App;
