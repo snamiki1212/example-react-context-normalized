@@ -1,19 +1,33 @@
 import React from "react";
-import { useTodoList } from "./contexts/domain/todoDomain";
-import {TodoView} from './components/TodoView'
+import { TodoViewContainer as TodoViewContextContainer } from "./state/contexts/TodoViewContainer";
+import { TodoViewContainer as TodoViewReducContainer } from "./state/redux/TodoViewContainer";
 
 const App: React.FC = () => {
+  const [type, setType] = React.useState<undefined | "context" | "redux">(
+    undefined
+  );
+
   return (
     <div className="App">
-      <TodoViewContainer />
+      <div>
+        <button
+          style={{ color: type === "context" ? "red" : "black" }}
+          onClick={() => setType("context")}
+        >
+          use context
+        </button>
+        <button
+          style={{ color: type === "redux" ? "red" : "black" }}
+          onClick={() => setType("redux")}
+        >
+          use redux
+        </button>
+      </div>
+
+      {type === "context" && <TodoViewContextContainer />}
+      {type === "redux" && <TodoViewReducContainer />}
     </div>
   );
 };
-
-const TodoViewContainer:React.FC = () => {
-  const { list, fetch, isFinished, check} = useTodoList();
-  return(<TodoView list={list} fetch={fetch} isFinished={isFinished} check={check} />)
-}
-
 
 export default App;

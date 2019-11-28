@@ -1,7 +1,7 @@
 import React from "react";
-import { todos as todosData } from "../../data";
+import { todos as todosData, fetchFromResource } from "../../../data";
 import { useTodoEntity } from "../entity/todoEntity";
-import { Todo } from "../../model/todo";
+import { Todo } from "../../../model/todo";
 
 // domain
 type Value = {
@@ -21,12 +21,6 @@ const initialValue: Value = {
 const TodoListCtx = React.createContext(initialValue);
 
 const per = 3;
-const fetchFromResource = (page: number) => {
-  const from = page * per;
-  const to = from + per;
-  return todosData.slice(from, to);
-};
-
 export const TodoListCtxProvider: React.FC = ({ children }) => {
   const [ids, setIDs] = React.useState<number[]>([]);
   const [pagination, setPagination] = React.useState<number>(0);
@@ -39,7 +33,7 @@ export const TodoListCtxProvider: React.FC = ({ children }) => {
 
   const fetch = React.useCallback(() => {
     if (isFinished) return;
-    const fetched = fetchFromResource(pagination);
+    const fetched = fetchFromResource(pagination, per);
 
     setIDs(prev => [...prev, ...fetched.map(e => e.id)]);
     fetched.forEach(e => append(e));
