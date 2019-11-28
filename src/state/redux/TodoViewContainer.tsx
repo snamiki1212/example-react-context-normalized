@@ -1,7 +1,7 @@
 import React from 'react'
 import { fetch,  selectIsFinished, selectPagination, selectTodoDomain } from "./domain/todoDomain";
 import { check } from "./entity/todoEntity";
-import {TodoView} from '../components/TodoView'
+import {TodoView} from '../../components/TodoView'
 import { useSelector, useDispatch } from 'react-redux'
 
 export const TodoViewContainer:React.FC = () => {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTodoList } from "./domain/todoDomain";
-import {TodoView} from '../components/TodoView'
+import {TodoView} from '../../components/TodoView'
 
 
 export const TodoViewContainer:React.FC = () => {

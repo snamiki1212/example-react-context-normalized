@@ -1,6 +1,6 @@
 import React from "react";
-import { todos as todoData, fetchFromResource } from "../../data";
-import { Todo } from "../../model/todo";
+import { todos as todoData, fetchFromResource } from "../../../data";
+import { Todo } from "../../../model/todo";
 import { select as selectTodoEntity, actions as todoEntityActions} from '../entity/todoEntity'
 import {createSelector} from 'reselect'
 

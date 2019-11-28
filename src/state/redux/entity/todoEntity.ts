@@ -1,6 +1,6 @@
 import React from "react";
-import { todos as todoData, fetchFromResource } from "../../data";
-import { Todo } from "../../model/todo";
+import { todos as todoData, fetchFromResource } from "../../../data";
+import { Todo } from "../../../model/todo";
 
 type TodoID = Todo["id"];
 

@@ -1,7 +1,7 @@
 import React from "react";
-import { todos as todosData, fetchFromResource } from "../../data";
+import { todos as todosData, fetchFromResource } from "../../../data";
 import { useTodoEntity } from "../entity/todoEntity";
-import { Todo } from "../../model/todo";
+import { Todo } from "../../../model/todo";
 
 // domain
 type Value = {

@@ -3,11 +3,11 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import { TodoListCtxProvider } from "./contexts/domain/todoDomain";
-import { TodoEntityCtxProvider } from "./contexts/entity/todoEntity";
+import { TodoListCtxProvider } from "./state/contexts/domain/todoDomain";
+import { TodoEntityCtxProvider } from "./state/contexts/entity/todoEntity";
 
 import { Provider as ReduxProvider } from "react-redux";
-import {store} from './redux'
+import {store} from './state/redux'
 
 const EntityProvider: React.FC = ({ children }) => {
   return <TodoEntityCtxProvider>{children}</TodoEntityCtxProvider>;

@@ -1,5 +1,5 @@
 import React from "react";
-import { Todo } from "../../model/todo";
+import { Todo } from "../../../model/todo";
 
 type Record<T> = { [id: string]: T };
 
