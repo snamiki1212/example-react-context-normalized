@@ -1,26 +1,19 @@
 import React from "react";
 import { useTodoList } from "./contexts/domain/todoDomain";
+import {TodoView} from './components/TodoView'
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <TodoView />
+      <TodoViewContainer />
     </div>
   );
 };
 
-const TodoView: React.FC = () => {
+const TodoViewContainer:React.FC = () => {
   const { list, fetch, isFinished, check} = useTodoList();
+  return(<TodoView list={list} fetch={fetch} isFinished={isFinished} check={check} />)
+}
 
-  return (
-    <div>
-      <button onClick={fetch}>fetch</button>
-      {list.map(e => (
-        <p key={e.id} onClick={check(e.id)}>{e.checked ? '✅' :'⬜️'}{e.id} {e.title}</p>
-      ))}
-      {isFinished && <p>finished!</p>}
-    </div>
-  );
-};
 
 export default App;

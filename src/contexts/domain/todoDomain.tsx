@@ -6,14 +6,14 @@ import { Todo } from "../../model/todo";
 // domain
 type Value = {
   ids: number[];
-  check: Function;
+  check: (id:number) => (e:any) => void;
   fetch: () => void;
   list: Todo[];
   isFinished: boolean;
 };
 const initialValue: Value = {
   ids: [],
-  check: () => {},
+  check: _ => _ => {},
   fetch: () => {},
   list: [],
   isFinished: false
