@@ -1,8 +1,11 @@
 import React from "react";
 import { todos as todoData, fetchFromResource } from "../../../data";
 import { Todo } from "../../../model/todo";
-import { select as selectTodoEntity, actions as todoEntityActions} from '../entity/todoEntity'
-import {createSelector} from 'reselect'
+import {
+  select as selectTodoEntity,
+  actions as todoEntityActions
+} from "../entity/todoEntity";
+import { createSelector } from "reselect";
 
 type todoID = Todo["id"];
 type pagination = number;
@@ -25,9 +28,13 @@ type StateType = {
  * selector
  */
 const selectDomainIDs = (state: any) => state.TodoDomain.ids as todoID[];
-export const selectTodoDomain = createSelector(selectDomainIDs, selectTodoEntity, (ids, entity) => {
-  return ids.map(id => entity[id]).filter(e => e != null)
-})
+export const selectTodoDomain = createSelector(
+  selectDomainIDs,
+  selectTodoEntity,
+  (ids, entity) => {
+    return ids.map(id => entity[id]).filter(e => e != null);
+  }
+);
 export const selectIsFinished = (state: any) => state.TodoDomain.isFinished;
 export const selectPagination = (state: any) => state.TodoDomain.pagination;
 
@@ -40,18 +47,23 @@ type ActionType = {
   payload: { ids: todoID[]; isFinished: boolean };
 };
 const actions = {
-  fetch: (ids: todoID[], isFinished: boolean) => ({ type: DOMAIN_TODO_FETCH, payload: { ids, isFinished } })
-}
+  fetch: (ids: todoID[], isFinished: boolean) => ({
+    type: DOMAIN_TODO_FETCH,
+    payload: { ids, isFinished }
+  })
+};
 
 /**
  * middleware
  */
 const per = 3;
-export const fetch = (pagination: number) => (dispatch: React.Dispatch<any>) => () => {
+export const fetch = (pagination: number) => (
+  dispatch: React.Dispatch<any>
+) => () => {
   const fetched = fetchFromResource(pagination, per);
   const ids = fetched.map(e => e.id);
-  const isFinished = fetched.length !== per;  
-  dispatch(todoEntityActions.append(fetched))
+  const isFinished = fetched.length !== per;
+  dispatch(todoEntityActions.append(fetched));
   dispatch(actions.fetch(ids, isFinished));
 };
 

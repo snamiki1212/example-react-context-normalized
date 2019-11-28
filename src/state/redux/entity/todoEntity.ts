@@ -1,5 +1,4 @@
 import React from "react";
-import { todos as todoData, fetchFromResource } from "../../../data";
 import { Todo } from "../../../model/todo";
 
 type TodoID = Todo["id"];
@@ -34,7 +33,7 @@ type ActionType =
       payload: { todoID: TodoID };
     };
 export const actions = {
-  append: (items: Todo[]) => ({ type: 'ENTITY_DOMAIN_APPEND', payload: { items }}),
+  append: (items: Todo[]) => ({ type: ENTITY_DOMAIN_APPEND, payload: { items }}),
   check: (todoID: TodoID) => ({
     type: ENTITY_DOMAIN_CHECK,
     payload: { todoID }
