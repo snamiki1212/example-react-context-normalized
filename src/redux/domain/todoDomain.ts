@@ -1,6 +1,8 @@
 import React from "react";
 import { todos as todoData, fetchFromResource } from "../../data";
 import { Todo } from "../../model/todo";
+import { select as selectTodoEntity} from '../entity/todoEntity'
+import {createSelector} from 'reselect'
 
 type todoID = Todo["id"];
 type pagination = number;
@@ -22,8 +24,10 @@ type StateType = {
 /**
  * selector
  */
-const selectTodoDomain = () => {};
-const selectThisDomainIDs = (state: any) => state.TodoDomain.ids;
+const selectDomainIDs = (state: any) => state.TodoDomain.ids as todoID[];
+export const selectTodoDomain = createSelector(selectDomainIDs, selectTodoEntity, (ids, entity) => {
+  return ids.map(id => entity[id]).filter(e => e != null)
+})
 export const selectIsFinished = (state: any) => state.TodoDomain.isFinished;
 export const selectPagination = (state: any) => state.TodoDomain.pagination;
 
@@ -40,12 +44,12 @@ type ActionType = {
  * middleware
  */
 const per = 3;
-export const fetch = (pagination: number) => (dispatch: any) => () => {
+export const fetch = (pagination: number) => (dispatch: React.Dispatch<any>) => () => {
   const fetched = fetchFromResource(pagination, per);
   const ids = fetched.map(e => e.id);
   const isFinished = fetched.length !== per;
+  dispatch({ type: 'ENTITY_DOMAIN_APPEND', payload: { items: fetched }})
   dispatch({ type: DOMAIN_TODO_FETCH, payload: { ids, isFinished } });
-  // TODO: entity
 };
 
 /**
