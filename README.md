@@ -1,6 +1,16 @@
 
-# ReduxWayでの正規化を、ReactのcontextのState設計にて実現したときの例
+# ReactのState設計にて正規化したときのサンプル
 
+- Ref: https://redux.js.org/recipes/structuring-reducers/basic-reducer-structure
+
+## Redux
+
+- domain+entityとなるので、reselectによるcreateSelectorが必要になる
+- 基本的に entity+domainでreducer を分割しているので、基本的にdomain+entityでdispatchを行う必要があり、煩雑。
+  - かつ、domainとentityの実行順序を意識しないと参照不可になることもある
+- entityが `{[id:string]: Object}` になるので、型推論が弱い。厳格になるようにする書く方法がある？
+
+## Context
 ### Domain and Entity
 
 - フロー
