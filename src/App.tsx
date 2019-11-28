@@ -3,7 +3,6 @@ import {TodoViewContainer as TodoViewContextContainer} from './contexts/TodoView
 import {TodoViewContainer as TodoViewReducContainer} from './redux/TodoViewContainer'
 
 // 
-import { useSelector, useStore} from 'react-redux'
 
 const App: React.FC = () => {
   return (

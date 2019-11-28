@@ -1,7 +1,7 @@
 import React from "react";
 import { todos as todoData, fetchFromResource } from "../../data";
 import { Todo } from "../../model/todo";
-import { select as selectTodoEntity} from '../entity/todoEntity'
+import { select as selectTodoEntity, actions as todoEntityActions} from '../entity/todoEntity'
 import {createSelector} from 'reselect'
 
 type todoID = Todo["id"];
@@ -39,6 +39,9 @@ type ActionType = {
   type: typeof DOMAIN_TODO_FETCH;
   payload: { ids: todoID[]; isFinished: boolean };
 };
+const actions = {
+  fetch: (ids: todoID[], isFinished: boolean) => ({ type: DOMAIN_TODO_FETCH, payload: { ids, isFinished } })
+}
 
 /**
  * middleware
@@ -47,9 +50,9 @@ const per = 3;
 export const fetch = (pagination: number) => (dispatch: React.Dispatch<any>) => () => {
   const fetched = fetchFromResource(pagination, per);
   const ids = fetched.map(e => e.id);
-  const isFinished = fetched.length !== per;
-  dispatch({ type: 'ENTITY_DOMAIN_APPEND', payload: { items: fetched }})
-  dispatch({ type: DOMAIN_TODO_FETCH, payload: { ids, isFinished } });
+  const isFinished = fetched.length !== per;  
+  dispatch(todoEntityActions.append(fetched))
+  dispatch(actions.fetch(ids, isFinished));
 };
 
 /**
